@@ -1,0 +1,20 @@
+local function acall (func, ...)
+  -- used to be necessary to allow autocompletion (before Far 3 build 6074)
+  -- now just prevents macro execution mark "P"
+  local ret, msg = pcall(mf.acall, func, ...)
+  if not ret then
+    if msg=="attempt to yield across C-call boundary" then
+      func(...)
+    else
+      error(stack.traceback(msg,2), 2)
+    end
+  end
+end
+
+if _cmdline then
+  print "Function to call specified func asynchronously (when run from macro)."
+  print "Export: sh.acall(func,...)"
+  return
+end
+
+return acall -- export

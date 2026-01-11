@@ -136,7 +136,7 @@ local function execCmdline (cmdline, opts, done, init)
       showRet(ret, cmdline, opts)
       if done then done() end
     else
-      saveRes(nil);
+      saveRes(nil)
       err = ret:gsub("\n\t", "\n   ")
       ErrMessage(err)
       if done then done(err) end

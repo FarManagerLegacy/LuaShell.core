@@ -33,7 +33,7 @@ end
 local function print_wrapper (...)
   U.GetUserScreen()
   if sh._shared.prnPrompt then
-    --_print(_shared.prnPrompt)
+    --_print(sh._shared.prnPrompt)
     printPrompt(sh._shared.prnPrompt)
     sh._shared.prnPrompt = false
   end

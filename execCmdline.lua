@@ -74,7 +74,6 @@ local function execCmdline (cmdline, opts, done, init)
   opts = opts or {}
   local arg = sh.CommandLineToArgv(cmdline)
   local _cmdline = arg[1] and assert(sh.shiftCmdStr(cmdline, arg[0]), "shiftCmdStr failed") or ""
-  local _dir = win.GetCurrentDir()
   local fardir = far.GetCurrentDirectory()
   local path = not opts.expr_only and sh.findScript(arg[0])
 
@@ -121,6 +120,7 @@ local function execCmdline (cmdline, opts, done, init)
   local trace = _shared.options.debug and traceback or smartTrace --????? or postmacro(ErrMessage
   local function run (func)
     if opts.echo_force then print(); U.SetUserScreen() end -- print prompt only
+    local _dir = win.GetCurrentDir()
     SetDir(fardir,_dir)
     if isExpr then arg = {} end --??
     local success,ret = ppack(xpcall(func, trace, unpack(arg)))
